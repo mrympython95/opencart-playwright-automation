@@ -1,0 +1,6 @@
+.idea/
+.venv/
+.pytest_cache/
+reports/
+__pycache__/
+utils/config.py

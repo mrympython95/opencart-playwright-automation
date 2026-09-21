@@ -1,0 +1,17 @@
+[
+  {
+    "test_name": "Invalid email and password",
+    "email": "invalid@example.com",
+    "password": "WrongPassword123"
+  },
+  {
+    "test_name": "Invalid email",
+    "email": "wrong@example.com",
+    "password": "WrongPassword123"
+  },
+  {
+    "test_name": "Invalid password",
+    "email": "invalid@example.com",
+    "password": "WrongPassword456"
+  }
+]
