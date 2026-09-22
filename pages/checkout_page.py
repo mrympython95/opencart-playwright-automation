@@ -99,15 +99,9 @@ class CheckoutPage:
     def set_payment_comment(self, comment: str):
         self.txt_payment_comment.fill(comment)
 
+
     def check_terms(self):
-        self.chk_terms.evaluate(
-            """element => {
-                element.checked = true;
-                element.dispatchEvent(
-                    new Event('change', { bubbles: true })
-                );
-            }"""
-        )
+        self.chk_terms.check()
 
     def click_continue_payment_method(self):
         self.btn_continue_payment_method.click()

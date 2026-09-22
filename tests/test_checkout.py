@@ -44,6 +44,21 @@ def test_checkout_start(login_page):
     # Step 2: Billing Details
     checkout_page.click_continue()
 
+    # Note: OpenCart demo has a JS race condition where Step 3's panel
+    # sometimes stays collapsed after clicking Continue. We wait for
+    # network to settle and manually expand it if needed.
+    home_page.page.wait_for_load_state("networkidle")
+    step3_header = home_page.page.locator("a[href='#collapse-shipping-address']")
+    if not checkout_page.btn_continue_delivery_address.is_visible():
+        step3_header.click()
+
+    expect(checkout_page.btn_continue_delivery_address).to_be_visible(timeout=10000)
+    checkout_page.click_continue_delivery_address()
+
+    checkout_page.click_continue_shipping_method()
+    checkout_page.check_terms()
+    checkout_page.click_continue_payment_method()
+    checkout_page.click_confirm_order()
 
 
 
