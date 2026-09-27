@@ -1,42 +1,56 @@
 # OpenCart E2E Test Automation
 
-Automated end-to-end tests for the OpenCart demo store using **Playwright** (Python) with the **Page Object Model** pattern.
+End-to-end test automation for the OpenCart demo store, built with Playwright and Python.
 
-## 🛠 Tech Stack
+## Tech Stack
 
-- **Playwright** (Python, sync API)
-- **pytest**
-- Page Object Model architecture
+- Playwright (Python)
+- pytest
+- Page Object Model
+- Allure Report
 
-## ✅ Test Coverage
+## What's tested
 
-| Feature         | Status         |
-|------------------|----------------|
-| Login            | ✅ Completed    |
-| Registration     | ✅ Completed    |
-| Product Search   | ✅ Completed    |
-| Product Selection| ✅ Completed    |
-| Shopping Cart    | ✅ Completed    |
-| Checkout         | ✅ Completed    |
-| Logout           | ✅ Completed    |
-| Reporting        | 🚧 In Progress  |
-| CI/CD Pipeline   | 📋 Planned      |
+| Feature           | Status      |
+|-------------------|-------------|
+| Login             | Done        |
+| Registration      | Done        |
+| Product Search    | Done        |
+| Product Selection | Done        |
+| Shopping Cart     | Done        |
+| Checkout          | Done        |
+| Logout            | Done        |
+| Reporting         | Done        |
+| CI/CD             | Not yet     |
 
-## 📁 Project Structure
+## Project structure
 
-├── pages/ # Page Object classes
-├── tests/ # Test cases
-├── utils/ # Config & helpers
-└── conftest.py # Fixtures
+```
+├── pages/          # Page Object classes
+├── tests/          # Test cases
+├── utils/          # Config and helpers
+├── testdata/       # JSON test data
+└── conftest.py     # Fixtures and configuration
+```
 
-## 🚀 Running Tests
+## Running the tests
 
 ```bash
 pip install -r requirements.txt
 playwright install
-pytest tests/
-``
+pytest
+```
 
-## 🐞 Notable Challenges Solved
+## Viewing the report
 
-- Debugged and fixed a JS race condition in the checkout flow (OpenCart's shipping-address panel intermittently failed to expand after AJAX submission).
+Tests run with Allure integration. After running the suite:
+
+```bash
+allure serve reports/allure-results
+```
+
+This opens an interactive report in your browser with pass/fail results, step-by-step details, and screenshots for anything that failed.
+
+## A bug worth mentioning
+
+While testing checkout, I ran into a case where the site's own JavaScript would sometimes fail to expand the shipping panel after submitting the billing form — a race condition on OpenCart's side, not in the test. Fixed it by waiting for the network to settle and manually expanding the panel if it stayed collapsed. Took a while to track down, but a good reminder that "flaky" isn't always the test's fault.
