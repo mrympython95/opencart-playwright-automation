@@ -51,6 +51,8 @@ allure serve reports/allure-results
 
 This opens an interactive report in your browser with pass/fail results, step-by-step details, and screenshots for anything that failed.
 
+![Allure Report](allure-report.png)
+
 ## A bug worth mentioning
 
 While testing checkout, I ran into a case where the site's own JavaScript would sometimes fail to expand the shipping panel after submitting the billing form — a race condition on OpenCart's side, not in the test. Fixed it by waiting for the network to settle and manually expanding the panel if it stayed collapsed. Took a while to track down, but a good reminder that "flaky" isn't always the test's fault.
